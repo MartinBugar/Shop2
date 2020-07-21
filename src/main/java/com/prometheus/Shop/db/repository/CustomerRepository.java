@@ -45,7 +45,7 @@ public class CustomerRepository {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
                 ps.setString(1, customer.getName());
-                ps.setString(2,customer.getSurname());
+                ps.setString(2,customer.getSurename());
                 ps.setString(3,customer.getEmail());
                 ps.setString(4,customer.getAddress());
 

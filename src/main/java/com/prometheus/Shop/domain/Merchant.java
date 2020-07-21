@@ -28,6 +28,15 @@ public class Merchant {
         return name;
     }
 
+    @Nullable
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(@Nullable Integer id) {
+        this.id = id;
+    }
+
     public void setName(@NonNull String name) {
         this.name = name;
     }

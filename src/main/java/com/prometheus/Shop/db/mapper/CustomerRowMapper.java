@@ -14,9 +14,9 @@ public class CustomerRowMapper implements RowMapper<Customer> {
      Customer customer = new Customer();
      customer.setId(resultSet.getInt("id"));
      customer.setName(resultSet.getString("name"));
-     customer.setSurname(resultSet.getString("surname"));
+     customer.setSurename(resultSet.getString("surename"));
      customer.setEmail(resultSet.getString("email"));
-     customer.setAddress(resultSet.getString("äddress"));
+     customer.setAddress(resultSet.getString("address"));
      customer.setAge(resultSet.getObject("age") == null ? null : resultSet.getInt("age"));
      customer.setPhoneNumber(resultSet.getString("phone_number"));
 

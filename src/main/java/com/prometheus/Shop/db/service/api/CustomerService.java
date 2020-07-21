@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CustomerService {
 
-    List<Customer> getCustomer(); // vrati vsetkych customerov
+    List<Customer> getCustomers(); // vrati vsetkych customerov
 
     @Nullable
     Customer get(int id); // vrati customera na zaklade id

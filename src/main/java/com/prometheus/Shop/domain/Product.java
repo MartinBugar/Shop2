@@ -32,7 +32,7 @@ public class Product {
     public Product(){
     }
 
-    public Product(int merchant_id, @NonNull String name, @NonNull String description, @NonNull Double price, @NonNull Timestamp createdAt, int available) {
+    public Product(int merchant_id, @NonNull String name, @NonNull String description, @NonNull Double price, int available) {
         this.merchant_id = merchant_id;
         this.name = name;
         this.description = description;
@@ -114,7 +114,7 @@ public class Product {
                 name.equals(product.name) &&
                 description.equals(product.description) &&
                 price.equals(product.price) &&
-                createdAt.equals(product.createdAt);
+                createdAt.getTime() == product.createdAt.getTime();
     }
 
     @Override

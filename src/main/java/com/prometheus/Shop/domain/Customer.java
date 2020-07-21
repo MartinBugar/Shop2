@@ -13,7 +13,7 @@ public class Customer {
     private String name;
 
     @NonNull
-    private String surname;
+    private String surename;
 
     @NonNull
     private String email;
@@ -29,9 +29,9 @@ public class Customer {
 
     public Customer(){}
 
-    public Customer(@NonNull String name, @NonNull String surname, @NonNull String email, @NonNull String address, @Nullable Integer age, @Nullable String phoneNumber) {
+    public Customer(@NonNull String name, @NonNull String surename, @NonNull String email, @NonNull String address, @Nullable Integer age, @Nullable String phoneNumber) {
         this.name = name;
-        this.surname = surname;
+        this.surename = surename;
         this.email = email;
         this.address = address;
         this.age = age;
@@ -57,12 +57,12 @@ public class Customer {
     }
 
     @NonNull
-    public String getSurname() {
-        return surname;
+    public String getSurename() {
+        return surename;
     }
 
-    public void setSurname(@NonNull String surname) {
-        this.surname = surname;
+    public void setSurename(@NonNull String surename) {
+        this.surename = surename;
     }
 
     @NonNull
@@ -108,7 +108,7 @@ public class Customer {
         Customer customer = (Customer) o;
         return Objects.equals(id, customer.id) &&
                 name.equals(customer.name) &&
-                surname.equals(customer.surname) &&
+                surename.equals(customer.surename) &&
                 email.equals(customer.email) &&
                 address.equals(customer.address) &&
                 Objects.equals(age, customer.age) &&
@@ -117,7 +117,7 @@ public class Customer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, email, address, age, phoneNumber);
+        return Objects.hash(id, name, surename, email, address, age, phoneNumber);
     }
 
 

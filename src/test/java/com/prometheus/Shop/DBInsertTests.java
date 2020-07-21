@@ -32,7 +32,7 @@ public class DBInsertTests {
     public void createCustomer(){
         Customer customer = new Customer();
         customer.setName("Ferko");
-        customer.setSurname("Mrkvicka");
+        customer.setSurename("Mrkvicka");
         customer.setEmail("ferko@gmail.com");
         customer.setAddress("T.Saratov");
         customer.setAge(22);
@@ -43,7 +43,7 @@ public class DBInsertTests {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(insertCustomer);
                 ps.setString(1,customer.getName());
-                ps.setString(2,customer.getSurname());
+                ps.setString(2,customer.getSurename());
                 ps.setString(3,customer.getEmail());
                 ps.setString(4,customer.getAddress());
                 ps.setInt(5,customer.getAge());
