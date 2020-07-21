@@ -15,12 +15,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 public class DBServiceTests {
 
     @Autowired
@@ -34,6 +36,7 @@ public class DBServiceTests {
 
    private Merchant merchant;
 
+
    @Before
    public void createMerchant(){
        if (merchant == null){
@@ -41,7 +44,6 @@ public class DBServiceTests {
            Integer id = merchantService.add(merchant);
            assert  id != null;
            merchant.setId(id);
-
        }
    }
 
@@ -101,16 +103,6 @@ public void merchant (){
 
       productService.delete(id);
       Assert.assertEquals(0,productService.getProducts().size());
-
-
-
-
-
-
-
-
-
-
 
   }
 

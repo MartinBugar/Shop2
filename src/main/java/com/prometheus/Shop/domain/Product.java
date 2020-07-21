@@ -23,7 +23,7 @@ public class Product {
     @NonNull
     private Double price;
 
-    @NonNull
+    @Nullable
     private Timestamp createdAt;
 
     @NonNull
@@ -85,7 +85,7 @@ public class Product {
         this.price = price;
     }
 
-    @NonNull
+    @Nullable
     public Timestamp getCreatedAt() {
         return createdAt;
     }
