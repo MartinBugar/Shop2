@@ -24,7 +24,7 @@ public class CustomerRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Customer get (int id){ // vrati mi jedneho  customera
+    public Customer get (int id){ // vrati mi jedneho  customera na zaklade id
         final String sql = "select * from customer where customer.id = " + id;
 
         try {

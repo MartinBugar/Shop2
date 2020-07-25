@@ -19,28 +19,28 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PostMapping
-    public ResponseEntity add(@RequestBody Customer customer){
-        Integer id = customerService.add(customer);
-        if (id != null){
-            return new ResponseEntity<>(id, HttpStatus.CREATED);
+        @PostMapping
+        public ResponseEntity add(@RequestBody Customer customer){
+            Integer id = customerService.add(customer);
+            if (id != null){
+                return new ResponseEntity<>(id, HttpStatus.CREATED);
+            }
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 
-    @GetMapping("{id}")
-    public ResponseEntity get (@PathVariable("{id}") int id){
-        Customer customer = customerService.get(id);
-        if (customer == null){
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        @GetMapping("{id}")
+        public ResponseEntity get (@PathVariable("id") int id){
+            Customer customer = customerService.get(id);
+            if (customer == null){
+                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(customer,HttpStatus.OK);
+
         }
-        return new ResponseEntity<>(customer,HttpStatus.OK);
 
-    }
-
-    @GetMapping()
-    public ResponseEntity getALL (){
-        List<Customer> customerList = customerService.getCustomers();
-        return new ResponseEntity <>(customerList, HttpStatus.OK);
+        @GetMapping()
+        public ResponseEntity getALL (){
+            List<Customer> customerList = customerService.getCustomers();
+            return new ResponseEntity <>(customerList, HttpStatus.OK);
     }
 }
