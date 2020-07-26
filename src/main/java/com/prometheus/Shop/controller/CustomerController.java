@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("customer")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    private final CustomerService customerService;//interface nepotrebuje new
 
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
