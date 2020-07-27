@@ -53,84 +53,7 @@ public class RestControllerTests {
 
     }
 
-    @Test
-    public void productTests () throws  Exception {
-        Product product = new Product(merchant.getId(),"klavesnica","super_klavesnica",55.9,250);
 
-        //Add product
-        String id = mockMvc.perform(post("/product")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(product)))
-                .andExpect(status().isCreated())
-                .andReturn().getResponse().getContentAsString();
-
-        product.setId(objectMapper.readValue(id, Integer.class));
-
-        //Get product
-        String returnedProduct = mockMvc.perform(get("/product/" + product.getId())
-        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
-
-        Product productJson = objectMapper.readValue(returnedProduct,Product.class);
-        Assert.assertEquals(product,productJson);
-
-        //Get all product
-        String productsJsonList = mockMvc.perform(get("/product")
-        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
-
-        System.out.println(productsJsonList);
-
-        List <Product> products = objectMapper.readValue(productsJsonList, new TypeReference<List<Product>>() {});
-        assert products.size() == 1;
-
-        Assert.assertEquals(product,products.get(0));
-
-        //update product
-        double updatePrice = product.getPrice() + 1;
-        int updateAvailable  = product.getAvailable() + 5;
-        UpdateProductRequest updateProductRequest = new UpdateProductRequest(product.getName(),product.getDescription(),updatePrice,updateAvailable);
-
-        mockMvc.perform(patch("/product/" + product.getId())
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(updateProductRequest)))
-                .andExpect(status().isOk());
-
-        String returnedUpdatedProduct = mockMvc.perform(get("/product/" + product.getId())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
-
-        Product updatedProduct = objectMapper.readValue(returnedUpdatedProduct, Product.class);
-        assert updatePrice == updatedProduct.getPrice();
-        assert updateAvailable == updatedProduct.getAvailable();
-        System.out.println(updatedProduct);
-
-
-        //Delete product
-        mockMvc.perform(delete("/product/" + product.getId())
-        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
-        mockMvc.perform(get("/product/" + product.getId())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound())
-                .andReturn().getResponse().getContentAsString();
-
-        String productsJsonList2 = mockMvc.perform(get("/product")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
-
-        List <Product> products2 = objectMapper.readValue(productsJsonList2, new TypeReference<List<Product>>() {});
-        assert products2.size() == 0;
-
-
-
-
-    }
 
 
     @Test
@@ -209,4 +132,82 @@ public class RestControllerTests {
         assert merchants.size() == 1;
         Assert.assertEquals(merchant,merchants.get(0));
     }
+
+    @Test
+    public void productTests () throws  Exception {
+        Product product = new Product(merchant.getId(),"klavesnica","super_klavesnica",55.9,250);
+
+        //Add product
+        String id = mockMvc.perform(post("/product")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(product)))
+                .andExpect(status().isCreated())
+                .andReturn().getResponse().getContentAsString();
+
+        product.setId(objectMapper.readValue(id, Integer.class));
+
+        //Get product
+        String returnedProduct = mockMvc.perform(get("/product/" + product.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        Product productJson = objectMapper.readValue(returnedProduct,Product.class);
+        Assert.assertEquals(product,productJson);
+
+        //Get all product
+        String productsJsonList = mockMvc.perform(get("/product")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        System.out.println(productsJsonList);
+
+        List <Product> products = objectMapper.readValue(productsJsonList, new TypeReference<List<Product>>() {});
+        assert products.size() == 1;
+
+        Assert.assertEquals(product,products.get(0));
+
+        //update product
+        double updatePrice = product.getPrice() + 1;
+        int updateAvailable  = product.getAvailable() + 5;
+        UpdateProductRequest updateProductRequest = new UpdateProductRequest(product.getName(),product.getDescription(),updatePrice,updateAvailable);
+
+        mockMvc.perform(patch("/product/" + product.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(updateProductRequest)))
+                .andExpect(status().isOk());
+
+        String returnedUpdatedProduct = mockMvc.perform(get("/product/" + product.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        Product updatedProduct = objectMapper.readValue(returnedUpdatedProduct, Product.class);
+        assert updatePrice == updatedProduct.getPrice();
+        assert updateAvailable == updatedProduct.getAvailable();
+        System.out.println(updatedProduct);
+
+
+        //Delete product
+        mockMvc.perform(delete("/product/" + product.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/product/" + product.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andReturn().getResponse().getContentAsString();
+
+        String productsJsonList2 = mockMvc.perform(get("/product")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        List <Product> products2 = objectMapper.readValue(productsJsonList2, new TypeReference<List<Product>>() {});
+        assert products2.size() == 0;
+
+    }
+
+
 }
