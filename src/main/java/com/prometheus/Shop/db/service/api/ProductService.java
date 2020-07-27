@@ -20,4 +20,6 @@ public interface ProductService {
 
 
     void update (int id, UpdateProductRequest request);
+
+    void updateAvailableInternal (int id, int newAvailable);
 }
